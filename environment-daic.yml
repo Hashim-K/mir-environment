@@ -35,7 +35,6 @@ dependencies:
   - audioread>=3.0.0
   - resampy>=0.4.2
   - pydub>=0.25.1
-  - audiomentations>=0.33.0
   - ffmpeg
 
   # ── Deep learning — pinned to CUDA 12.4 for A40 nodes ────────────────────
@@ -68,6 +67,7 @@ dependencies:
       - "mirdata>=1.0.0"
       - "pretty_midi"
       - "mido"
+      - "audiomentations>=0.33.0"
 
       # BeatNet — from Hashim-K fork, no deps to avoid stale numba pin
       - "--no-deps git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
