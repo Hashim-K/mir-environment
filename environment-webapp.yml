@@ -1,0 +1,56 @@
+name: MIR-webapp
+channels:
+  - conda-forge
+  - defaults
+
+# ── CPU-only environment ──────────────────────────────────────────────────────
+# Use for:
+#   - mir-webapp development
+#   - CI/CD pipelines
+#   - Machines without a GPU
+#   - Quick local testing without CUDA overhead
+# No PyTorch CUDA, no audio hardware, no GUI, no jupyter
+# ─────────────────────────────────────────────────────────────────────────────
+
+dependencies:
+  # ── Python ────────────────────────────────────────────────────────────────
+  - python=3.10
+  - pip>=23.0
+
+  # ── Core scientific ───────────────────────────────────────────────────────
+  - numpy>=1.23.0,<2.0
+  - scipy>=1.9.0
+  - scikit-learn>=1.3.0
+  - pandas>=1.5.0
+
+  # ── Audio (CPU inference only) ────────────────────────────────────────────
+  - librosa>=0.10.0
+  - soundfile>=0.12.0
+  - audioread>=3.0.0
+  - resampy>=0.4.2
+  - ffmpeg
+
+  # ── PyTorch CPU only ──────────────────────────────────────────────────────
+  - cpuonly
+  - pytorch>=2.0.0
+  - torchaudio>=2.0.0
+
+  # ── Web stack ─────────────────────────────────────────────────────────────
+  - pip:
+      - "fastapi>=0.100.0"
+      - "uvicorn>=0.23.0"
+      - "paramiko>=3.0.0" # SSH to DAIC from webapp
+      - "websockets"
+
+      # DVC for pulling promoted weights
+      - "dvc[s3]"
+
+      # MIR-specific (lightweight subset)
+      - "mir_eval>=0.7"
+
+      # mir-core editable
+      - "-e ../mir-core"
+
+      # Dev
+      - "pytest>=7.4.0"
+      - "httpx" # for fastapi test client

@@ -1,0 +1,106 @@
+name: MIR
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+  - defaults
+
+dependencies:
+  # ── Python ────────────────────────────────────────────────────────────────
+  - python=3.10
+  - pip>=23.0
+
+  # ── Core scientific (conda-forge for best binary compatibility) ───────────
+  - numpy>=1.23.0,<2.0 # hard upper bound — madmom + BeatNet require <2.0
+  - scipy>=1.9.0
+  - scikit-learn>=1.3.0
+  - pandas>=1.5.0
+  - sympy
+
+  # ── numba — MUST come from conda-forge, not pip ───────────────────────────
+  - numba>=0.57.0
+  - llvmlite
+
+  # ── Audio ─────────────────────────────────────────────────────────────────
+  - librosa>=0.10.0
+  - soundfile>=0.12.0
+  - audioread>=3.0.0
+  - resampy>=0.4.2
+  - pydub>=0.25.1
+  - audiomentations>=0.33.0
+  - ffmpeg # system ffmpeg via conda — avoids PATH issues
+  - pyaudio
+  - sounddevice
+
+  # ── Deep learning ─────────────────────────────────────────────────────────
+  - pytorch>=2.0.0
+  - torchaudio>=2.0.0
+  - pytorch-cuda=12.4 # matches DAIC driver + login node CUDA version
+  - pytorch-lightning>=2.1.0
+
+  # ── Visualisation & notebooks ─────────────────────────────────────────────
+  - matplotlib>=3.7.0
+  - seaborn>=0.12.0
+  - plotly>=5.14.0
+  - jupyter
+  - jupyterlab
+  - ipython>=8.0.0
+  - ipywidgets
+  - ipykernel
+
+  # ── Experiment tracking ───────────────────────────────────────────────────
+  - tensorboard>=2.14.0
+
+  # ── Utilities ─────────────────────────────────────────────────────────────
+  - tqdm>=4.65.0
+  - joblib>=1.3.0
+  - pyyaml
+  - rich
+  - click
+
+  # ── Build tools (needed for madmom compilation) ───────────────────────────
+  - cython>=0.29.0
+  - setuptools>=69.0
+  - wheel
+
+  # ── Hardware / embedded dev tools (laptop only) ───────────────────────────
+  - pyserial
+  - evdev
+
+  # ── Desktop UI (laptop only) ──────────────────────────────────────────────
+  - pyqt
+
+  # ── Dev tooling ───────────────────────────────────────────────────────────
+  - black>=23.0.0
+  - flake8>=6.0.0
+  - isort>=5.12.0
+  - pytest>=7.4.0
+  - pytest-cov>=4.1.0
+  - mypy>=1.0.0
+
+  # ── DVC with S3 support ───────────────────────────────────────────────────
+  - pip:
+      - "dvc[s3]"
+
+      # MIR-specific — not on conda, order matters
+      - "mir_eval>=0.7"
+      - "mirdata>=1.0.0"
+      - "pretty_midi"
+      - "mido"
+
+      # BeatNet — from Hashim-K fork, no deps to avoid stale numba pin
+      - "--no-deps git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
+
+      # madmom — no PyPI release, install from fork/upstream GitHub
+      - "--no-deps git+https://github.com/CPJKU/madmom.git"
+
+      # Experiment tracking
+      - "wandb>=0.24.0"
+
+      # Web / API (for webapp dev on laptop)
+      - "fastapi>=0.100.0"
+      - "uvicorn>=0.23.0"
+      - "gradio>=4.0.0"
+
+      # mir-core itself — installed editable from workspace
+      - "-e ../mir-core"
