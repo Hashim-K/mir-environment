@@ -29,7 +29,7 @@ dependencies:
   - pydub>=0.25.1
   - ffmpeg
   - pyaudio
-  - sounddevice
+  - python-sounddevice
 
   # ── Deep learning ─────────────────────────────────────────────────────────
   - pytorch>=2.0.0
