@@ -1,8 +1,8 @@
 name: MIR
 channels:
-  - conda-forge
   - pytorch
   - nvidia
+  - conda-forge
   - defaults
 
 dependencies:
@@ -31,7 +31,7 @@ dependencies:
   - pyaudio
   - python-sounddevice
 
-  # ── Deep learning ─────────────────────────────────────────────────────────
+  # ── Deep learning (from pytorch channel, pinned to CUDA 12.4 for A40) ─────
   - pytorch>=2.0.0
   - torchaudio>=2.0.0
   - pytorch-cuda=12.4
@@ -88,11 +88,11 @@ dependencies:
       - "mido"
       - "audiomentations>=0.33.0"
 
-      # BeatNet — from Hashim-K fork, no deps to avoid stale numba pin
-      - "--no-deps git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
+      # BeatNet — from Hashim-K fork
+      - "git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
 
-      # madmom — no PyPI release, install from fork/upstream GitHub
-      - "--no-deps git+https://github.com/CPJKU/madmom.git"
+      # madmom — from GitHub
+      - "git+https://github.com/CPJKU/madmom.git"
 
       # Experiment tracking
       - "wandb>=0.24.0"

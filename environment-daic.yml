@@ -1,8 +1,8 @@
 name: MIR-daic
 channels:
-  - conda-forge
   - pytorch
   - nvidia
+  - conda-forge
   - defaults
 
 # ── DAIC-specific notes ───────────────────────────────────────────────────────
@@ -69,11 +69,11 @@ dependencies:
       - "mido"
       - "audiomentations>=0.33.0"
 
-      # BeatNet — from Hashim-K fork, no deps to avoid stale numba pin
-      - "--no-deps git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
+      # BeatNet — from Hashim-K fork
+      - "git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
 
       # madmom — from GitHub
-      - "--no-deps git+https://github.com/CPJKU/madmom.git"
+      - "git+https://github.com/CPJKU/madmom.git"
 
       # Experiment tracking
       - "wandb>=0.24.0"

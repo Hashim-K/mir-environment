@@ -31,9 +31,8 @@ dependencies:
   - ffmpeg
 
   # ── PyTorch CPU only ──────────────────────────────────────────────────────
-  - cpuonly
-  - pytorch>=2.0.0
-  - torchaudio>=2.0.0
+  - pytorch>=2.0.0=cpu*
+  - torchaudio>=2.0.0=cpu*
 
   # ── Web stack ─────────────────────────────────────────────────────────────
   - pip:

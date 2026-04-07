@@ -19,10 +19,7 @@ Reproducible conda environments for the MSc thesis MIR project.
 conda env create -f environment.yml
 conda activate MIR
 
-# 2. Finish tricky installs (madmom, BeatNet)
-mir-setup
-
-# 3. Verify
+# 2. Verify
 python -m mir_env.verify_installation
 ```
 
@@ -31,15 +28,16 @@ python -m mir_env.verify_installation
 ## DAIC Setup
 
 ```bash
-# 1. Set path to mir-core (adjust to your workspace layout)
+# 1. Load miniconda (DAIC system module)
+module use /opt/insy/modulefiles
+module load miniconda
+
+# 2. Set path to mir-core (adjust to your workspace layout)
 export MIR_CORE_PATH=/path/to/msc-thesis/repos/mir-core
 
-# 2. Create env (do this on a login node, not a compute node)
+# 3. Create env (do this on a login node, not a compute node)
 conda env create -f environment-daic.yml
 conda activate MIR-daic
-
-# 3. Finish tricky installs
-mir-setup
 
 # 4. Verify
 python -m mir_env.verify_installation
@@ -48,10 +46,16 @@ python -m mir_env.verify_installation
 Add to your `~/.bashrc` on DAIC:
 
 ```bash
+module use /opt/insy/modulefiles
+module load miniconda
 export MIR_DATA_ROOT=/tudelft.net/your-group/datasets
 export MIR_OUTPUTS_ROOT=/tudelft.net/your-group/outputs
 export MIR_CORE_PATH=/path/to/msc-thesis/repos/mir-core
 ```
+
+> **Note:** DAIC's `/tudelft.net` mounts are Windows-based and have pip
+> compatibility issues. Keep conda envs in `$HOME` (the default) — do not
+> relocate them to project storage.
 
 ### Recommended SLURM header for A40 nodes
 
@@ -68,8 +72,8 @@ export MIR_CORE_PATH=/path/to/msc-thesis/repos/mir-core
 ## Webapp / CI Setup
 
 ```bash
-conda env create -f environment-cpu.yml
-conda activate MIR-cpu
+conda env create -f environment-webapp.yml
+conda activate MIR-webapp
 ```
 
 ---
@@ -79,4 +83,4 @@ conda activate MIR-cpu
 - `numpy<2.0` is a hard constraint — both madmom and BeatNet require it
 - `numba` must come from conda-forge, not pip — the pip wheel lacks proper LLVM bindings on some platforms
 - `madmom` has no PyPI release — installed from GitHub master
-- `BeatNet` is installed from `Hashim-K/beatnet` fork with `--no-deps` to avoid its stale numba pin
+- `BeatNet` is installed from `Hashim-K/beatnet` fork (stale numba pin removed in fork)
