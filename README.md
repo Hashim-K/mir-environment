@@ -8,6 +8,8 @@ Reproducible conda environments for the MSc thesis MIR project.
 | ------------------------ | ---------------------------------- | --------- |
 | `environment.yml`        | Laptop — full stack                | CUDA 12.4 |
 | `environment-daic.yml`   | DAIC HPC — headless, A40-optimised | CUDA 12.4 |
+| `environment-delftblue.yml` | DelftBlue — headless GPU training | CUDA 12.4 |
+| `environment-apptainer.yml` | Common Apptainer runtime base     | CUDA 12.4 |
 | `environment-webapp.yml` | Webapp / CI — lightweight          | CPU only  |
 
 ---
@@ -74,6 +76,46 @@ export MIR_CORE_PATH=/path/to/msc-thesis/repos/mir-core
 ```bash
 conda env create -f environment-webapp.yml
 conda activate MIR-webapp
+```
+
+---
+
+## DelftBlue Setup
+
+Install Miniconda or Miniforge in `$HOME` first. Then create the environment on
+a login node:
+
+```bash
+export MIR_CORE_PATH=/path/to/msc-thesis/repos/mir-core
+conda env create -f environment-delftblue.yml
+conda activate MIR-delftblue
+python -m mir_env.verify_installation
+```
+
+On DelftBlue worker nodes, do not rely on `conda init`. Source `conda.sh`
+directly in your job script before activating the environment:
+
+```bash
+module load openssh
+module load git
+unset CONDA_SHLVL
+source "$HOME/miniconda3/etc/profile.d/conda.sh"
+conda activate MIR-delftblue
+```
+
+---
+
+## Common Apptainer Runtime
+
+`environment-apptainer.yml` is the shared headless GPU runtime used by the
+common Apptainer build in `msc-thesis`.
+
+The intended flow is:
+
+```bash
+cd /path/to/msc-thesis
+./scripts/build-apptainer.sh
+./scripts/apptainer-exec.sh python -m mir_env.verify_installation
 ```
 
 ---

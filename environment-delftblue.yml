@@ -1,0 +1,69 @@
+name: MIR-delftblue
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+
+# DelftBlue-specific notes:
+# - Create or update this environment on a login node.
+# - Keep the environment in $HOME, not on shared project storage.
+# - On worker nodes, do not rely on `conda init`; source conda.sh explicitly.
+# - DelftBlue docs recommend loading newer openssh/git modules when using Miniconda.
+
+dependencies:
+  # Python
+  - python=3.10
+  - pip>=23.0
+
+  # Core scientific
+  - numpy>=1.23.0,<2.0
+  - scipy>=1.9.0
+  - scikit-learn>=1.3.0
+  - pandas>=1.5.0
+
+  # numba / LLVM
+  - numba>=0.57.0
+  - llvmlite
+
+  # Audio
+  - librosa>=0.10.0
+  - pysoundfile>=0.12.0
+  - audioread>=3.0.0
+  - resampy>=0.4.2
+  - pydub>=0.25.1
+  - ffmpeg
+
+  # Deep learning
+  - pytorch>=2.0.0
+  - torchaudio>=2.0.0
+  - pytorch-cuda=12.4
+  - pytorch-lightning>=2.1.0
+
+  # Experiment tracking
+  - tensorboard>=2.14.0
+
+  # Utilities
+  - tqdm>=4.65.0
+  - joblib>=1.3.0
+  - pyyaml
+  - rich
+  - click
+
+  # Build tools
+  - cython>=0.29.0
+  - setuptools>=69.0
+  - wheel
+
+  # DVC with S3 support
+  - pip:
+      - "dvc[s3]"
+      - "mir_eval>=0.7"
+      - "mirdata>=1.0.0"
+      - "pretty_midi"
+      - "mido"
+      - "audiomentations>=0.33.0"
+      - "git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
+      - "git+https://github.com/CPJKU/madmom.git"
+      - "wandb>=0.24.0"
+      - "-e ${MIR_CORE_PATH}"
