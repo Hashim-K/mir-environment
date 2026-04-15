@@ -53,6 +53,8 @@ module load miniconda
 export MIR_DATA_ROOT=/tudelft.net/your-group/datasets
 export MIR_OUTPUTS_ROOT=/tudelft.net/your-group/outputs
 export MIR_CORE_PATH=/path/to/msc-thesis/repos/mir-core
+export MIR_SHARED_ROOT=/tudelft.net/your-group/project-root
+export MIR_RUNS_ROOT=/tudelft.net/your-group/project-root/runs
 ```
 
 > **Note:** DAIC's `/tudelft.net` mounts are Windows-based and have pip
@@ -91,6 +93,12 @@ conda env create -f environment-delftblue.yml
 conda activate MIR-delftblue
 python -m mir_env.verify_installation
 ```
+
+Recommended shared-storage split:
+
+- keep repos and Conda/Miniforge in `$HOME`
+- keep large run outputs, DVC cache, and Apptainer images under your project
+  storage root such as `/tudelft.net/staff-umbrella/mirworkspace`
 
 On DelftBlue worker nodes, do not rely on `conda init`. Source `conda.sh`
 directly in your job script before activating the environment:
