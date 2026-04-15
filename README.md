@@ -7,8 +7,7 @@ Reproducible conda environments for the MSc thesis MIR project.
 | File                     | Use                                | GPU       |
 | ------------------------ | ---------------------------------- | --------- |
 | `environment.yml`        | Laptop — full stack                | CUDA 12.4 |
-| `environment-daic.yml`   | DAIC HPC — headless, A40-optimised | CUDA 12.4 |
-| `environment-delftblue.yml` | DelftBlue — headless GPU training | CUDA 12.4 |
+| `environment-hpc-bootstrap.yml` | Minimal HPC bootstrap env for DAIC and DelftBlue | CPU only |
 | `environment-apptainer.yml` | Common Apptainer runtime base     | CUDA 12.4 |
 | `environment-webapp.yml` | Webapp / CI — lightweight          | CPU only  |
 
@@ -34,15 +33,12 @@ python -m mir_env.verify_installation
 module use /opt/insy/modulefiles
 module load miniconda
 
-# 2. Set path to mir-core (adjust to your workspace layout)
-export MIR_CORE_PATH=/path/to/msc-thesis/repos/mir-core
+# 2. Create the lightweight bootstrap env on a login node
+conda env create -f environment-hpc-bootstrap.yml
+conda activate MIR-hpc
 
-# 3. Create env (do this on a login node, not a compute node)
-conda env create -f environment-daic.yml
-conda activate MIR-daic
-
-# 4. Verify
-python -m mir_env.verify_installation
+# 3. Verify bootstrap tooling
+dvc version
 ```
 
 Add to your `~/.bashrc` on DAIC:
@@ -60,6 +56,9 @@ export MIR_RUNS_ROOT=/tudelft.net/your-group/project-root/runs
 > **Note:** DAIC's `/tudelft.net` mounts are Windows-based and have pip
 > compatibility issues. Keep conda envs in `$HOME` (the default) — do not
 > relocate them to project storage.
+
+The full training/runtime stack should run through the shared Apptainer image,
+not through a large native Conda environment on the login node.
 
 ### Recommended SLURM header for A40 nodes
 
@@ -88,10 +87,9 @@ Install Miniconda or Miniforge in `$HOME` first. Then create the environment on
 a login node:
 
 ```bash
-export MIR_CORE_PATH=/path/to/msc-thesis/repos/mir-core
-conda env create -f environment-delftblue.yml
-conda activate MIR-delftblue
-python -m mir_env.verify_installation
+conda env create -f environment-hpc-bootstrap.yml
+conda activate MIR-hpc
+dvc version
 ```
 
 Recommended shared-storage split:
@@ -123,7 +121,7 @@ The intended flow is:
 ```bash
 cd /path/to/msc-thesis
 ./scripts/build-apptainer.sh
-./scripts/apptainer-exec.sh python -m mir_env.verify_installation
+./scripts/smoke-test-apptainer.sh
 ```
 
 ---

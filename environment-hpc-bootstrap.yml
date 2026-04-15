@@ -1,0 +1,20 @@
+name: MIR-hpc
+channels:
+  - conda-forge
+  - defaults
+
+# Minimal bootstrap environment for DAIC and DelftBlue.
+# This is not the training runtime. The full runtime lives in the shared
+# Apptainer image. This env is only for:
+# - local DVC access
+# - lightweight workspace scripts
+# - publishing / metadata helpers
+
+dependencies:
+  - python=3.10
+  - pip>=23.0
+  - pyyaml
+  - rich
+  - click
+  - pip:
+      - "dvc[s3]"
