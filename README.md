@@ -106,7 +106,7 @@ module load openssh
 module load git
 unset CONDA_SHLVL
 source "$HOME/miniconda3/etc/profile.d/conda.sh"
-conda activate MIR-delftblue
+conda activate MIR-hpc
 ```
 
 ---
@@ -132,3 +132,4 @@ cd /path/to/msc-thesis
 - `numba` must come from conda-forge, not pip — the pip wheel lacks proper LLVM bindings on some platforms
 - `madmom` has no PyPI release — installed from GitHub master
 - `BeatNet` is installed from `Hashim-K/beatnet` fork (stale numba pin removed in fork)
+- The HPC bootstrap env keeps `dvc` and `dvc-s3` on Conda to avoid pip builds of `pygit2` on cluster login nodes

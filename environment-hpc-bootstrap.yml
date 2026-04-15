@@ -12,9 +12,8 @@ channels:
 
 dependencies:
   - python=3.10
-  - pip>=23.0
   - pyyaml
   - rich
   - click
-  - pip:
-      - "dvc[s3]"
+  - dvc
+  - dvc-s3
