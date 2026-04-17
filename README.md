@@ -120,8 +120,8 @@ The intended flow is:
 
 ```bash
 cd /path/to/msc-thesis
-./scripts/build-apptainer.sh
-./scripts/smoke-test-apptainer.sh
+./scripts/apptainer/build.sh
+./scripts/apptainer/smoke-test.sh
 ```
 
 ---
