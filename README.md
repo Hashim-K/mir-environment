@@ -15,6 +15,15 @@ Reproducible conda environments for the MSc thesis MIR project.
 
 ## Laptop Setup
 
+Prefer the parent workspace initializer:
+
+```bash
+cd /path/to/msc-thesis
+./scripts/workspace/init.sh
+```
+
+Manual environment creation is still possible from this repo:
+
 ```bash
 # 1. Create and activate
 conda env create -f environment.yml
@@ -27,6 +36,18 @@ python -m mir_env.verify_installation
 ---
 
 ## DAIC Setup
+
+Prefer the parent workspace initializer:
+
+```bash
+cd /path/to/msc-thesis
+./scripts/workspace/init.sh
+```
+
+It creates the lightweight `MIR-hpc` bootstrap env and leaves the full runtime
+to Apptainer.
+
+Manual setup:
 
 ```bash
 # 1. Load miniconda (DAIC system module)
@@ -83,8 +104,15 @@ conda activate MIR-webapp
 
 ## DelftBlue Setup
 
-Install Miniconda or Miniforge in `$HOME` first. Then create the environment on
-a login node:
+Prefer the parent workspace initializer after installing Miniconda or Miniforge
+in `$HOME`:
+
+```bash
+cd /path/to/msc-thesis
+./scripts/workspace/init.sh
+```
+
+Manual environment creation on a login node:
 
 ```bash
 conda env create -f environment-hpc-bootstrap.yml
