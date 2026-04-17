@@ -11,6 +11,10 @@ Reproducible conda environments for the MSc thesis MIR project.
 | `environment-apptainer.yml` | Common Apptainer runtime base     | CUDA 12.4 |
 | `environment-webapp.yml` | Webapp / CI — lightweight          | CPU only  |
 
+There are no separate native `daic` or `delftblue` full-stack environments.
+Cluster machines use `environment-hpc.yml` for host-side Git/DVC/helper tools
+and `environment-apptainer.yml` for the actual runtime image.
+
 ---
 
 ## Laptop Setup
