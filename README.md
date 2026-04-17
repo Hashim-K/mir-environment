@@ -7,7 +7,7 @@ Reproducible conda environments for the MSc thesis MIR project.
 | File                     | Use                                | GPU       |
 | ------------------------ | ---------------------------------- | --------- |
 | `environment.yml`        | Laptop — full stack                | CUDA 12.4 |
-| `environment-hpc-bootstrap.yml` | Minimal HPC bootstrap env for DAIC and DelftBlue | CPU only |
+| `environment-hpc.yml` | Minimal HPC host-tools env for DAIC and DelftBlue | CPU only |
 | `environment-apptainer.yml` | Common Apptainer runtime base     | CUDA 12.4 |
 | `environment-webapp.yml` | Webapp / CI — lightweight          | CPU only  |
 
@@ -55,7 +55,7 @@ module use /opt/insy/modulefiles
 module load miniconda
 
 # 2. Create the lightweight bootstrap env on a login node
-conda env create -f environment-hpc-bootstrap.yml
+conda env create -f environment-hpc.yml
 conda activate MIR-hpc
 
 # 3. Verify bootstrap tooling
@@ -115,7 +115,7 @@ cd /path/to/msc-thesis
 Manual environment creation on a login node:
 
 ```bash
-conda env create -f environment-hpc-bootstrap.yml
+conda env create -f environment-hpc.yml
 conda activate MIR-hpc
 dvc version
 ```
