@@ -67,5 +67,5 @@ dependencies:
   - pip:
       - "mirdata>=1.0.0"
       - "audiomentations>=0.33.0"
-      - "git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
+      - "git+https://github.com/Hashim-K/beatnet.git@be864a4b0f126aa90aeabdeedf23f48865e09512"
       - "git+https://github.com/CPJKU/madmom.git"
