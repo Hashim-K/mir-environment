@@ -32,6 +32,7 @@ dependencies:
   - resampy>=0.4.2
   - pydub>=0.25.1
   - ffmpeg
+  - openh264
   - mir_eval>=0.7
   - pretty_midi
   - mido
