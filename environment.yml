@@ -59,7 +59,7 @@ dependencies:
 
   # ── Build tools (needed for madmom compilation) ───────────────────────────
   - cython>=0.29.0
-  - setuptools>=69.0
+  - setuptools>=69.0,<81
   - wheel
 
   # ── Hardware / embedded dev tools (laptop only) ───────────────────────────
@@ -96,6 +96,11 @@ dependencies:
 
       # Experiment tracking
       - "wandb>=0.28.0,<0.29"
+
+      # Classifier adaptation backends
+      - "tensorflow==2.19.1"
+      - "tensorflow-hub==0.16.1"
+      - "tf-keras==2.19.0"
 
       # Web / API (for webapp dev on laptop)
       - "fastapi>=0.100.0"
