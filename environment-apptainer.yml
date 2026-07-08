@@ -67,7 +67,6 @@ dependencies:
 
   # Source-only / pip-only packages
   - pip:
-      - "--no-build-isolation"
       - "mirdata>=1.0.0"
       - "audiomentations>=0.33.0"
       - "git+https://github.com/Hashim-K/beatnet.git@v1.2.0"
