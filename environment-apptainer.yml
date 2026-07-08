@@ -2,6 +2,7 @@ name: MIR-apptainer
 channels:
   - pytorch
   - nvidia
+  - nvidia/label/cuda-12.1.0
   - conda-forge
   - defaults
 
