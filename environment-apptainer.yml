@@ -41,6 +41,7 @@ dependencies:
   # Deep learning
   - pytorch>=2.0.0
   - pytorch::torchaudio>=2.0.0
+  - pytorch::torchvision>=0.15.0
   - pytorch-cuda=12.1
   - pytorch-lightning>=2.1.0
 
