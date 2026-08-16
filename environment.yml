@@ -58,6 +58,10 @@ dependencies:
   - rich
   - click
 
+  # ── Completed-run report publishing ─────────────────────────────────────
+  - texlive-core
+  - latexmk
+
   # ── Build tools (needed for madmom compilation) ───────────────────────────
   - cython>=0.29.0
   - setuptools>=69.0,<81

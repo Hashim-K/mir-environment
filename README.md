@@ -62,8 +62,9 @@ module load miniconda
 conda env create -f environment-hpc.yml
 conda activate MIR-hpc
 
-# 3. Verify bootstrap tooling
+# 3. Verify bootstrap and report-publishing tooling
 dvc version
+latexmk -version
 ```
 
 Add to your `~/.bashrc` on DAIC:
@@ -122,6 +123,7 @@ Manual environment creation on a login node:
 conda env create -f environment-hpc.yml
 conda activate MIR-hpc
 dvc version
+latexmk -version
 ```
 
 Recommended shared-storage split:

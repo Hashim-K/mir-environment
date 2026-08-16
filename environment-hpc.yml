@@ -17,3 +17,7 @@ dependencies:
   - click
   - dvc
   - dvc-s3
+
+  # Completed-run report publishing
+  - texlive-core
+  - latexmk
